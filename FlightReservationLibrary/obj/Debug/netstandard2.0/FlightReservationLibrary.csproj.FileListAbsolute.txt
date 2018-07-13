@@ -1,0 +1,9 @@
+C:\Users\jcortes\Desktop\Libraries\FlightReservationLibrary\bin\Debug\netstandard2.0\FlightReservationLibrary.deps.json
+C:\Users\jcortes\Desktop\Libraries\FlightReservationLibrary\bin\Debug\netstandard2.0\FlightReservationLibrary.dll
+C:\Users\jcortes\Desktop\Libraries\FlightReservationLibrary\bin\Debug\netstandard2.0\FlightReservationLibrary.pdb
+C:\Users\jcortes\Desktop\Libraries\FlightReservationLibrary\obj\Debug\netstandard2.0\FlightReservationLibrary.csprojAssemblyReference.cache
+C:\Users\jcortes\Desktop\Libraries\FlightReservationLibrary\obj\Debug\netstandard2.0\FlightReservationLibrary.csproj.CoreCompileInputs.cache
+C:\Users\jcortes\Desktop\Libraries\FlightReservationLibrary\obj\Debug\netstandard2.0\FlightReservationLibrary.AssemblyInfoInputs.cache
+C:\Users\jcortes\Desktop\Libraries\FlightReservationLibrary\obj\Debug\netstandard2.0\FlightReservationLibrary.AssemblyInfo.cs
+C:\Users\jcortes\Desktop\Libraries\FlightReservationLibrary\obj\Debug\netstandard2.0\FlightReservationLibrary.dll
+C:\Users\jcortes\Desktop\Libraries\FlightReservationLibrary\obj\Debug\netstandard2.0\FlightReservationLibrary.pdb
