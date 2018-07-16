@@ -49,7 +49,6 @@ namespace FlightReservationLibrary {
             }
             File.AppendAllText (newFileName, clientDetails);
         }
-
         public List<FlightModel> SearchFlight (string FilterBy, List<FlightModel> FlightList, string SearchBy) {
             List<FlightModel> FilteredFlightList = new List<FlightModel> ();
             foreach (FlightModel Flight in FlightList) {
@@ -64,6 +63,14 @@ namespace FlightReservationLibrary {
                 }
             }
             return FilteredFlightList;
+        }
+        public bool FlightExists (ReservationModel Reservation, List<FlightModel> AllFlights) {
+            foreach(FlightModel Flight in AllFlights) {
+                if(Flight.strAirlineCode == Reservation.strAirlineCode && Flight.strFlightNumber == Reservation.strFlightNumber) {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
