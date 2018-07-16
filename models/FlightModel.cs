@@ -11,7 +11,7 @@ namespace FlightReservationLibrary {
         public FlightModel () {
 
         }
-        public string strAirlineCode { get; set; }
+        public string strAirlineCode { get; set; } 
         public string strFlightNumber { get; set; }
         public string strDepartureStation { get; set; }
         public string strArrivalStation { get; set; }
