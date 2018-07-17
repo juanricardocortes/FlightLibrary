@@ -28,7 +28,7 @@ namespace FlightReservationLibrary {
                         FlightList.Add (flight);
                     }
                 }
-            } catch (Exception e) {
+            } catch (Exception) {
                 //do something.
             }
 
@@ -36,7 +36,7 @@ namespace FlightReservationLibrary {
         }
         public void AddFlight (FlightModel flight) {
             string newFileName = (@"C:\Users\jcortes\Desktop\FlightReservations\src\main\savedfiles\SavedFlights.csv");
-            string clientDetails = flight.strAirlineCode + "," +
+            string FlightDetails = flight.strAirlineCode + "," +
                 flight.strFlightNumber + "," +
                 flight.strDepartureStation + "," +
                 flight.strArrivalStation + "," +
@@ -47,7 +47,18 @@ namespace FlightReservationLibrary {
                 string clientHeader = "Airline Code" + "," + "Flight Number" + "," + "Departure Station" + "," + "Arrival Station" + "," + "STA" + "," + "STD" + Environment.NewLine;
                 File.WriteAllText (newFileName, clientHeader);
             }
-            File.AppendAllText (newFileName, clientDetails);
+            File.AppendAllText (newFileName, FlightDetails);
+        }
+        public bool IsUniqueFlight (FlightModel Flight, List<FlightModel> ListOfFlights) {
+            foreach (FlightModel _Flight in ListOfFlights) {
+                if (Flight.strAirlineCode == _Flight.strAirlineCode && Flight.strFlightNumber == _Flight.strFlightNumber) {
+                    if (TimeSpan.Parse (Flight.strSTA) >= TimeSpan.Parse (_Flight.strSTA) && TimeSpan.Parse (Flight.strSTA) <= TimeSpan.Parse (_Flight.strSTD) ||
+                        TimeSpan.Parse (Flight.strSTD) >= TimeSpan.Parse (_Flight.strSTA) && TimeSpan.Parse (Flight.strSTD) <= TimeSpan.Parse (_Flight.strSTD)) {
+                            return false;
+                    }
+                }
+            }
+            return true;
         }
         public List<FlightModel> SearchFlight (string FilterBy, List<FlightModel> FlightList, string SearchBy) {
             List<FlightModel> FilteredFlightList = new List<FlightModel> ();
@@ -63,14 +74,6 @@ namespace FlightReservationLibrary {
                 }
             }
             return FilteredFlightList;
-        }
-        public bool FlightExists (ReservationModel Reservation, List<FlightModel> AllFlights) {
-            foreach(FlightModel Flight in AllFlights) {
-                if(Flight.strAirlineCode == Reservation.strAirlineCode && Flight.strFlightNumber == Reservation.strFlightNumber) {
-                    return true;
-                }
-            }
-            return false;
         }
     }
 }
