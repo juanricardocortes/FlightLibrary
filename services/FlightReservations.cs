@@ -81,17 +81,29 @@ namespace FlightReservationLibrary {
             List<ReservationModel> ReservationsList = new List<ReservationModel> ();
             try {
                 string line = null;
-                using (StreamReader reader = File.OpenText (@"C:\Users\jcortes\Desktop\FlightReservations\src\main\savedfiles\SavedFlights.csv")) {
+                using (StreamReader reader = File.OpenText (@"C:\Users\jcortes\Desktop\FlightReservations\src\main\savedfiles\ReservedFlights.csv")) {
                     while ((line = reader.ReadLine ()) != null) {
                         var values = line.Split (',');
-                        ReservationModel Reservation = new ReservationModel (values[0], values[1], values[2], values[3], values[5], values[4], values[6], values[7], values[8], values[9], values[10], values[11]);
-                        ReservationsList.Add (Reservation);
+                        if (!(values[0] == "Airline Code")) {
+                            ReservationModel Reservation = new ReservationModel (values[0], values[1], values[2], values[3], values[5], values[4], values[6], values[7], values[8], values[9], values[10], values[11]);
+                            ReservationsList.Add (Reservation);
+                        }
+
                     }
                 }
             } catch (Exception) {
                 //do something.
             }
             return ReservationsList;
+        }
+        public ReservationModel SearchByPNR (string PNR, List<ReservationModel> ReservationsList) {
+            ReservationModel MatchingReservation = new ReservationModel ();
+            foreach(ReservationModel Reservation in ReservationsList) {
+                if (Reservation.strPNR == PNR) {
+                    MatchingReservation = Reservation;
+                }
+            }
+            return MatchingReservation;
         }
     }
 }

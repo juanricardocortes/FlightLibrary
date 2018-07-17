@@ -31,7 +31,6 @@ namespace FlightReservationLibrary {
             } catch (Exception) {
                 //do something.
             }
-
             return FlightList;
         }
         public void AddFlight (FlightModel flight) {
