@@ -32,43 +32,45 @@ namespace FlightReservationLibrary {
             }
             return FilteredFlights;
         }
-        public ReservationModel AddReservation (ReservationModel Reservation) {
-            Reservation.strPNR = Utilities.GeneratePNR ();
-            Reservation.strAge = Utilities.GetAge (DateTime.Parse (Reservation.strBirthday));
-            string newFileName = (@"C:\Users\jcortes\Desktop\FlightReservations\src\main\savedfiles\ReservedFlights.csv");
-            string ReservationDetails =
-                Reservation.strAirlineCode + "," +
-                Reservation.strFlightNumber + "," +
-                Reservation.strDepartureStation + "," +
-                Reservation.strArrivalStation + "," +
-                Reservation.strSTA + "," +
-                Reservation.strSTD + "," +
-                Reservation.strFlightDate + "," +
-                Reservation.strPNR + "," +
-                Reservation.strFirstName + "," +
-                Reservation.strLastName + "," +
-                Reservation.strBirthday + "," +
-                Reservation.strAge +
-                Environment.NewLine;
-            if (!File.Exists (newFileName)) {
-                string ReservationHeader =
-                    "Airline Code" + "," +
-                    "Flight Number" + "," +
-                    "Departure Station" + "," +
-                    "Arrival Station" + "," +
-                    "STA" + "," +
-                    "STD" + "," +
-                    "Flight Date" + "," +
-                    "PNR" + "," +
-                    "First Name" + "," +
-                    "Last Name" + "," +
-                    "Birthday" + "," +
-                    "Age" +
+        public List<ReservationModel> AddFlightReservations (List<ReservationModel> FlightReservations) {
+            string PNR = Utilities.GeneratePNR ();
+            foreach (ReservationModel Reservation in FlightReservations) {
+                Reservation.strPNR = PNR;
+                string newFileName = (@"C:\Users\jcortes\Desktop\FlightReservations\src\main\savedfiles\ReservedFlights.csv");
+                string ReservationDetails =
+                    Reservation.strAirlineCode + "," +
+                    Reservation.strFlightNumber + "," +
+                    Reservation.strDepartureStation + "," +
+                    Reservation.strArrivalStation + "," +
+                    Reservation.strSTA + "," +
+                    Reservation.strSTD + "," +
+                    Reservation.strFlightDate + "," +
+                    Reservation.strPNR + "," +
+                    Reservation.strFirstName + "," +
+                    Reservation.strLastName + "," +
+                    Reservation.strBirthday + "," +
+                    Reservation.strAge +
                     Environment.NewLine;
-                File.WriteAllText (newFileName, ReservationHeader);
+                if (!File.Exists (newFileName)) {
+                    string ReservationHeader =
+                        "Airline Code" + "," +
+                        "Flight Number" + "," +
+                        "Departure Station" + "," +
+                        "Arrival Station" + "," +
+                        "STA" + "," +
+                        "STD" + "," +
+                        "Flight Date" + "," +
+                        "PNR" + "," +
+                        "First Name" + "," +
+                        "Last Name" + "," +
+                        "Birthday" + "," +
+                        "Age" +
+                        Environment.NewLine;
+                    File.WriteAllText (newFileName, ReservationHeader);
+                }
+                File.AppendAllText (newFileName, ReservationDetails);
             }
-            File.AppendAllText (newFileName, ReservationDetails);
-            return Reservation;
+            return FlightReservations;  
         }
         public ReservationModel ReserveFlight (ReservationModel Reservation, FlightModel Flight) {
             Reservation.strArrivalStation = Flight.strArrivalStation;
@@ -96,14 +98,20 @@ namespace FlightReservationLibrary {
             }
             return ReservationsList;
         }
-        public ReservationModel SearchByPNR (string PNR, List<ReservationModel> ReservationsList) {
-            ReservationModel MatchingReservation = new ReservationModel ();
-            foreach(ReservationModel Reservation in ReservationsList) {
+        public List<ReservationModel> SearchByPNR (string PNR, List<ReservationModel> ReservationsList) {
+            List<ReservationModel> MatchingReservations = new List<ReservationModel> ();
+            foreach (ReservationModel Reservation in ReservationsList) {
                 if (Reservation.strPNR == PNR) {
-                    MatchingReservation = Reservation;
+                    MatchingReservations.Add(Reservation);
                 }
             }
-            return MatchingReservation;
+            return MatchingReservations;
+        }
+        public List<ReservationModel> GetAgeOfPassengers (List<ReservationModel> ReservationsList) {
+            foreach(ReservationModel Reservation in ReservationsList) {
+                Reservation.strAge = Utilities.GetAge(DateTime.Parse (Reservation.strBirthday));
+            }
+            return ReservationsList;
         }
     }
 }

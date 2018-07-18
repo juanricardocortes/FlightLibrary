@@ -1,5 +1,7 @@
+using System;
+
 namespace FlightReservationLibrary {
-    public class ReservationModel : FlightModel {
+    public class ReservationModel : FlightModel , ICloneable {
         public ReservationModel (string airlinecode, string flightnumber, string departurestation, string arrivalstation, string std, string sta, string flightdate, string pnr, string firstname, string lastname, string birthday, string age) {
             this.strAirlineCode = airlinecode;
             this.strFlightNumber = flightnumber;
@@ -22,6 +24,11 @@ namespace FlightReservationLibrary {
         public string strAge { get; set; }
         public ReservationModel () {
 
+        }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
         }
     }
 }

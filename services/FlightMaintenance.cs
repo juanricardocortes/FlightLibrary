@@ -24,7 +24,7 @@ namespace FlightReservationLibrary {
                 using (StreamReader reader = File.OpenText (@"C:\Users\jcortes\Desktop\FlightReservations\src\main\savedfiles\SavedFlights.csv")) {
                     while ((line = reader.ReadLine ()) != null) {
                         var values = line.Split (',');
-                        FlightModel flight = new FlightModel (values[0], values[1], values[3], values[2], values[4], values[5]);
+                        FlightModel flight = new FlightModel (values[0], values[1], values[2], values[3], values[4], values[5]);
                         FlightList.Add (flight);
                     }
                 }
