@@ -33,6 +33,7 @@ namespace FlightReservationLibrary {
             }
             return FlightList;
         }
+        
         public void AddFlight (FlightModel flight) {
             string newFileName = (@"C:\Users\jcortes\Desktop\FlightReservations\src\main\savedfiles\SavedFlights.csv");
             string FlightDetails = flight.strAirlineCode + "," +
@@ -51,8 +52,8 @@ namespace FlightReservationLibrary {
         public bool IsUniqueFlight (FlightModel Flight, List<FlightModel> ListOfFlights) {
             foreach (FlightModel _Flight in ListOfFlights) {
                 if (Flight.strAirlineCode == _Flight.strAirlineCode && Flight.strFlightNumber == _Flight.strFlightNumber) {
-                    if (TimeSpan.Parse (Flight.strSTA) >= TimeSpan.Parse (_Flight.strSTA) && TimeSpan.Parse (Flight.strSTA) <= TimeSpan.Parse (_Flight.strSTD) ||
-                        TimeSpan.Parse (Flight.strSTD) >= TimeSpan.Parse (_Flight.strSTA) && TimeSpan.Parse (Flight.strSTD) <= TimeSpan.Parse (_Flight.strSTD)) {
+                    if (TimeSpan.Parse (Flight.strSTA) <= TimeSpan.Parse (_Flight.strSTA) && TimeSpan.Parse (Flight.strSTA) >= TimeSpan.Parse (_Flight.strSTD) ||
+                        TimeSpan.Parse (Flight.strSTD) <= TimeSpan.Parse (_Flight.strSTA) && TimeSpan.Parse (Flight.strSTD) >= TimeSpan.Parse (_Flight.strSTD)) {
                             return false;
                     }
                 }
